@@ -17,6 +17,27 @@ export default MaterializeInputField.extend({
     this.$('select').material_select();
   },
 
+  _valueChanged: Ember.observer('value', function () {
+    var val = this.get('value');
+    var $sel = this.$('select');
+    if (val !== $sel.val()) {
+      val = Ember.isBlank(val) ? "" : String(val);
+      var text = '';
+      $sel.find('option')
+        .each(function (i, opt) {
+          var $opt = $(opt);
+          var match = ($opt.val() === val);
+          $opt.prop('selected', match);
+          if (match) {
+            text = $opt.text();
+          }
+        });
+      $sel.trigger('change');
+      this.$('input.select-dropdown').val(text);
+      $sel.val(val).trigger('change');
+    }
+  }),
+
   //TODO: clean up any listeners that $.select() puts in place
   // _teardownSelect() {
   //

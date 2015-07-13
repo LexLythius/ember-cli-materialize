@@ -1,31 +1,36 @@
+<header>
 <div class="navbar-fixed">
-<nav class="demo-page-nav">
-  <div class="nav-wrapper ">
-    <div class="container">
-      <a href="#!" class="brand-logo deep-orange-text text-darken-2">
-        <img class="ember-logo hide-on-med-and-down" src="images/ember.svg" />
-        Materialize
-      </a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse deep-orange-text text-darken-2"><i class="mdi-navigation-menu"></i></a>
-
+  <nav class="demo-page-nav deep-orange">
+    <div class="nav-wrapper">
+      <div class="container-fluid">
+        <a href="#!" class="brand-logo white-text">
+          <img class="ember-logo hide-on-med-and-down" src="images/ember-white.svg" />
+          Materialize
+        </a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse demo-button-collapse deep-orange-text text-darken-2"><i class="mdi-navigation-menu"></i></a>
+      </div>
     </div>
-
-  </div>
-</nav>
+  </nav>
 </div>
- <ul class="side-nav fixed demo-page-submenu" id="mobile-demo">
-      {{#each demoSections as |section|}}
-          {{#link-to section.route activeClass='active' tagName='li'}}
-            <a class="deep-orange-text text-darken-2">{{section.name}}</a>
-          {{/link-to}}
-      {{/each}}
-    </ul>
+</header>
+<ul class="side-nav fixed demo-page-submenu" id="mobile-demo">
+  {{#each demoSections as |section|}}
+    {{#link-to section.route activeClass='active' tagName='li'}}
+      {{#link-to section.route}}
+        {{section.name}}
+        {{#if section.new}}
+          {{#md-badge class='deep-orange lighten-1 new-badge right white-text'}}New{{/md-badge}}
+        {{/if}}
+      {{/link-to}}
+    {{/link-to}}
+  {{/each}}
+</ul>
 <main>
   {{outlet}}
 </main>
+
 {{md-modal-container}}
 
-<footer class="page-footer deep-orange darken-2">
-
+<footer class="page-footer demo-footer deep-orange darken-2">
   {{#md-copyright text='Copyright Text' startYear=2014}}<a class="grey-text text-lighten-4 right" href="#!">More Links</a>{{/md-copyright}}
 </footer>

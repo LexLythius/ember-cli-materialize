@@ -38,6 +38,10 @@ export default MaterializeInputField.extend({
     }
   }),
 
+  _disabledChanged: Ember.observer('disabled', function () {
+    this.$('select,input.select-dropdown').prop('disabled', !! this.get('disabled'));
+  }),
+
   //TODO: clean up any listeners that $.select() puts in place
   // _teardownSelect() {
   //
